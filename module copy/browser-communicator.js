@@ -1,6 +1,6 @@
 // ---- ----
 import {JSONMessageQueue,ResponseVector} from 'message-relay-services'
-import { EventEmitter } from './events'
+import { EventEmitter } from 'events'
 
 
 

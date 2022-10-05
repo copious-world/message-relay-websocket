@@ -2,9 +2,16 @@
   "name": "message-relay-websocket",
   "version": "1.0.0",
   "description": "A wrapper of message-relay-services allowing for websockt use - server and client",
+  "module": "./dist/index.mjs",
   "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "scripts": {
-    "test": "node test/index.js"
+    "test": "node test/index.js",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -25,10 +32,11 @@
   },
   "homepage": "https://github.com/copious-world/message-relay-websocket#readme",
   "dependencies": {
-    "message-relay-services": "^0.9.7",
+    "message-relay-services": "^0.9.8",
     "ws": "^8.9.0"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^14.1.0",
     "events": "^3.3.0"
   }
 }
