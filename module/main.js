@@ -2,4 +2,4 @@
 
 import {MessageRelayer} from './ws-relay-client'
 
-module.exports = MessageRelayer;
+export let WSMessageRelayer = MessageRelayer

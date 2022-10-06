@@ -2,6 +2,10 @@ import { Communicator } from './browser-communicator'
 import { EventEmitter } from './events'
 
 
+const DEFAULT_MAX_RECONNECT = 20
+const DEFAULT_RECONNECT_WAIT = 5
+
+
 class WSWriter extends EventEmitter {
 
     constructor(ws) {
@@ -102,22 +106,22 @@ export class MessageRelayer extends Communicator {
     _setup_connection_handlers(client,conf) {
         //
         // 1. data
-        ws.onmessage = ((com) => { return (data) => {
+        client.ws.onmessage = ((com) => { return (data) => {
             com.client_add_data_and_react(data)
         }})(this)
         //
         //  2. close
-        ws.onclose = ((com) => { return () => {
+        client.ws.onclose = ((com) => { return () => {
             this.unwrap_event(this.address)
             console.log('Client closed');
             if ( client.attempt_reconnect ) {
                 client._attempt_reconnect(conf)
             }
-            com.closeAll(client_name)
+            com.closeAll()
         }})(this)
         //
         // 3. error
-        ws.onerror = (err) => {
+        client.ws.onerror = (err) => {
             this.unwrap_event(this.address)
             console.log(err);
         }
