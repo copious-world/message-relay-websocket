@@ -10,8 +10,7 @@ const name = pkg.name
 export default {
 	input: 'module/main.js',
 	output: [
-		{ file: pkg.module, 'format': 'es' },
-		{ file: pkg.main, 'format': 'umd', name }
+		{ file: pkg.module, 'format': 'umd', name }
 	],
 	plugins: [
 		resolve({'preferBuiltins': false})
