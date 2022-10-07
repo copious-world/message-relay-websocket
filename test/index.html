@@ -694,12 +694,30 @@ html {
 
     import {WSMessageRelayer} from './dist/index.mjs'
 
+    let my_label = "test-web-page"
     let conf = {
         "address" : "localhost",
         "port" : 9797
     }
     let relayer = new WSMessageRelayer(conf)
-    
+    relayer.on('client-ready',async () => {
+
+        let status = await relayer.subscribe('oranges','fruit',(publication) => {
+            console.log(my_label + "::  got publication")
+            console.dir(publication,null,2)
+            let message = publication.message
+            //
+            let odiv = document.getElementById("get-pubs")
+            odiv.innerText = message
+        })
+
+        console.log("ready or not")
+        let response = await relayer.publish('oranges','fruit',{
+            "message" : "THIS IS FROM THE WEB PAGE"
+        })
+        console.log(response)
+    })
+
 </script>
 <script>
 

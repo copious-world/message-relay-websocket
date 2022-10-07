@@ -885,8 +885,6 @@ class MessageRelayer extends Communicator {
     //
     constructor(conf,wrapper) {
         super(conf,wrapper);
-        this.ws = false;
-
     }
 
     //
@@ -961,7 +959,8 @@ class MessageRelayer extends Communicator {
     _setup_connection_handlers(client,conf) {
         //
         // 1. data
-        client.ws.onmessage = ((com) => { return (data) => {
+        client.ws.onmessage = ((com) => { return (ev) => {   // ws returns an event
+            let data = ev.data;
             com.client_add_data_and_react(data);
         }})(this);
         //

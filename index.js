@@ -1,9 +1,15 @@
 
 let mrls = require('message-relay-services')  // will export a chain from the message-relay-services to applications
 
+let WSMessageRelayer = require('./lib/ws_client')
+let WSServeMessageEndpoint = require('./lib/ws_endpoint')
+let WSServeMessageRelay = require('./lib/ws_message_relay')
 
-
-
+//
+module.exports.WSMessageRelayer = WSMessageRelayer
+module.exports.WSServeMessageEndpoint = WSServeMessageEndpoint
+module.exports.WSServeMessageRelay = WSServeMessageRelay
+//
 module.exports.MessageRelayer = mrls.ClientMessageRelay
 module.exports.ServeMessageRelay = mrls.ServerMessageRelay
 module.exports.ServeMessageEndpoint = mrls.ServerMessageEndpoint

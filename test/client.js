@@ -34,7 +34,7 @@ function sleeper(secs) {
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 
 test_client.on('client-ready',async () => {
-    let status = await test_client.subscribe('oranges','fuit',(message) => {
+    let status = await test_client.subscribe('oranges','fruit',(message) => {
         console.log(my_label + "::  got publication")
         console.dir(message,null,2)
     })
@@ -43,7 +43,7 @@ test_client.on('client-ready',async () => {
     console.log("sleeping")
     await sleeper(my_secs)
     console.log("SLEPT")
-    test_client.publish('oranges','fuit',{
+    test_client.publish('oranges','fruit',{
         "message" : ("this is a test from: " + my_label)
     })
 })
